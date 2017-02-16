@@ -1,0 +1,57 @@
+inherit kf5
+
+NAME="dolphin"
+VERSION=16.08.3
+RELEASE=1
+CATEGORY="KDE"
+SUMMARY="KDE file manager"
+DESCRIPTION=
+
+PKG_NAMES="${NAME} ${NAME}-devel"
+dolphin_CONTENTS="
+	etc/xdg/autostart/dolphin.desktop
+	etc/xdg/servicemenu.knsrc
+	usr/bin/cygdolphinprivate-5.dll
+	usr/bin/cygdolphinvcs-5.dll
+	usr/bin/cygkdeinit5_dolphin.dll
+	usr/bin/dolphin.exe
+	usr/bin/servicemenu*installation
+	usr/lib/qt5/plugins/dolphinpart.dll
+	usr/lib/qt5/plugins/kcm_dolphin*.dll
+	usr/share/applications/org.kde.dolphin.desktop
+	usr/share/config.kcfg/dolphin_*
+	usr/share/doc/HTML/en/dolphin/
+	usr/share/doc/dolphin/
+	usr/share/kservices5/dolphinpart.desktop
+	usr/share/kservices5/kcmdolphin*.desktop
+	usr/share/kservicetypes5/fileviewversioncontrolplugin.desktop
+	usr/share/kxmlgui5/dolphin/
+	usr/share/kxmlgui5/dolphinpart/
+	usr/share/metainfo/org.kde.dolphin.appdata.xml
+"
+dolphin_devel_REQUIRES="libQt5Gui-devel"
+dolphin_devel_CONTENTS="
+	usr/include/Dolphin/
+	usr/include/dolphinvcs_export.h
+	usr/lib/cmake/DolphinVcs/
+	usr/lib/libdolphinvcs.dll.a
+	usr/share/dbus-1/interfaces/org.freedesktop.FileManager1.xml
+"
+PKG_IGNORE="
+	usr/include/dolphin_export.h
+	usr/lib/libdolphinprivate.dll.a
+	usr/share/dbus-1/services/org.kde.dolphin.FileManager1.service
+"
+
+src_install() {
+	cd ${B}
+	kf5_install
+
+	# Do not package the DBus service file because every FD.o-compliant
+	# file manager should provide org.freedesktop.FileManager1 but only
+	# each desktop's "native" one should run.  The supported solution
+	# is for none of them to register for DBus autostart, but leave the
+	# session manager to launch the service provider for the given desktop.
+	# See also: https://bugzilla.redhat.com/show_bug.cgi?id=1394927#c6
+	make_autostart_entry "${NAME} --daemon" "${SUMMARY}" "OnlyShowIn=KDE;"
+}
