@@ -1,32 +1,27 @@
 inherit kf5
 
 NAME="dolphin"
-VERSION=16.08.3
+VERSION=17.04.3
 RELEASE=1
 CATEGORY="KDE"
 SUMMARY="KDE file manager"
 DESCRIPTION=
 
-PKG_NAMES="${NAME} ${NAME}-devel"
+PKG_NAMES="${NAME} ${NAME}-devel ${NAME}5-part"
 dolphin_CONTENTS="
 	etc/xdg/autostart/dolphin.desktop
 	etc/xdg/servicemenu.knsrc
-	usr/bin/cygdolphinprivate-5.dll
-	usr/bin/cygdolphinvcs-5.dll
 	usr/bin/cygkdeinit5_dolphin.dll
 	usr/bin/dolphin.exe
 	usr/bin/servicemenu*installation
-	usr/lib/qt5/plugins/dolphinpart.dll
 	usr/lib/qt5/plugins/kcm_dolphin*.dll
 	usr/share/applications/org.kde.dolphin.desktop
 	usr/share/config.kcfg/dolphin_*
-	usr/share/doc/HTML/en/dolphin/
-	usr/share/doc/dolphin/
-	usr/share/kservices5/dolphinpart.desktop
+	usr/share/doc/HTML/*/dolphin/
 	usr/share/kservices5/kcmdolphin*.desktop
-	usr/share/kservicetypes5/fileviewversioncontrolplugin.desktop
 	usr/share/kxmlgui5/dolphin/
-	usr/share/kxmlgui5/dolphinpart/
+	usr/share/locale/*/LC_MESSAGES/dolphin.mo
+	usr/share/locale/*/LC_SCRIPTS/dolphin/dolphin.js
 	usr/share/metainfo/org.kde.dolphin.appdata.xml
 "
 dolphin_devel_REQUIRES="libQt5Gui-devel"
@@ -36,6 +31,15 @@ dolphin_devel_CONTENTS="
 	usr/lib/cmake/DolphinVcs/
 	usr/lib/libdolphinvcs.dll.a
 	usr/share/dbus-1/interfaces/org.freedesktop.FileManager1.xml
+"
+dolphin5_part_CONTENTS="
+	usr/bin/cygdolphinprivate-5.dll
+	usr/bin/cygdolphinvcs-5.dll
+	usr/lib/qt5/plugins/dolphinpart.dll
+	usr/share/doc/dolphin/
+	usr/share/kservices5/dolphinpart.desktop
+	usr/share/kservicetypes5/fileviewversioncontrolplugin.desktop
+	usr/share/kxmlgui5/dolphinpart/
 "
 PKG_IGNORE="
 	usr/include/dolphin_export.h
