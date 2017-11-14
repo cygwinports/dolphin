@@ -1,7 +1,7 @@
 inherit kf5
 
 NAME="dolphin"
-VERSION=17.04.3
+VERSION=17.08.3
 RELEASE=1
 CATEGORY="KDE"
 SUMMARY="KDE file manager"
@@ -19,7 +19,6 @@ dolphin_CONTENTS="
 	usr/share/config.kcfg/dolphin_*
 	usr/share/doc/HTML/*/dolphin/
 	usr/share/kservices5/kcmdolphin*.desktop
-	usr/share/kxmlgui5/dolphin/
 	usr/share/locale/*/LC_MESSAGES/dolphin.mo
 	usr/share/locale/*/LC_SCRIPTS/dolphin/dolphin.js
 	usr/share/metainfo/org.kde.dolphin.appdata.xml
@@ -39,7 +38,6 @@ dolphin5_part_CONTENTS="
 	usr/share/doc/dolphin/
 	usr/share/kservices5/dolphinpart.desktop
 	usr/share/kservicetypes5/fileviewversioncontrolplugin.desktop
-	usr/share/kxmlgui5/dolphinpart/
 "
 PKG_IGNORE="
 	usr/include/dolphin_export.h
